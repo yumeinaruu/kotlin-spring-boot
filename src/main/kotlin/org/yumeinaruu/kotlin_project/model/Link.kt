@@ -31,6 +31,22 @@ class Link {
 
     fun getUserId(): String? = userId?.toString()
 
+    fun setId(id: Long?) {
+        this.id = id
+    }
+
+    fun setService(service: String?) {
+        this.service = service
+    }
+
+    fun setLink(link: String?) {
+        this.link = link
+    }
+
+    fun setUser(user: User?) {
+        this.userId = user
+    }
+
     override fun toString(): String {
         return "Link(id=$id, service=$service, link=$link, userId=$userId)"
     }
