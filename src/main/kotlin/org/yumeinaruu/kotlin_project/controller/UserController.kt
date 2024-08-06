@@ -1,7 +1,10 @@
 package org.yumeinaruu.kotlin_project.controller
 
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.yumeinaruu.kotlin_project.model.User
+import org.yumeinaruu.kotlin_project.model.dto.UserCreateDto
 import org.yumeinaruu.kotlin_project.service.UserService
 
 @RestController
@@ -13,8 +16,10 @@ class UserController(val userService: UserService) {
     }
 
     @PostMapping
-    fun create(@RequestBody user: User): User {
-        userService.createUser(user)
-        return user
+    fun create(@RequestBody user: UserCreateDto): ResponseEntity<User> {
+        if(userService.createUser(user)){
+            return ResponseEntity(HttpStatus.CREATED)
+        }
+        return ResponseEntity(HttpStatus.CONFLICT)
     }
 }

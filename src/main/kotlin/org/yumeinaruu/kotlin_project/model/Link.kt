@@ -10,16 +10,28 @@ class Link {
     @Id
     @SequenceGenerator(name = "linksIdSeqGen", sequenceName = "links_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "linksIdSeqGen")
-    var id: Long? = null
+    private var id: Long? = null
 
     @Column(name = "service")
-    var service: String? = null
+    private var service: String? = null
 
     @Column(name = "link")
-    var link: String? = null
+    private var link: String? = null
 
     @JsonIgnore
     @JoinColumn(name = "user_id")
     @ManyToOne
-    var userId: User? = null
+    private var userId: User? = null
+
+    fun getId(): Long? = id
+
+    fun getService(): String? = service
+
+    fun getLink(): String? = link
+
+    fun getUserId(): String? = userId?.toString()
+
+    override fun toString(): String {
+        return "Link(id=$id, service=$service, link=$link, userId=$userId)"
+    }
 }

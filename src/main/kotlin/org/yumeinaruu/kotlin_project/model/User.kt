@@ -10,22 +10,54 @@ class User {
     @Id
     @SequenceGenerator(name = "linksIdSeqGen", sequenceName = "links_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "linksIdSeqGen")
-    var id: Long? = null
+    private var id: Long? = null
 
     @Column(name = "username")
-    var username: String? = null
+    private var username: String? = null
 
     @Column(name = "description")
-    var description: String? = null
+    private var description: String? = null
 
     @Column(name = "created", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    var created: Timestamp? = null
+    private var created: Timestamp? = null
 
     @Column(name = "changed")
     @Temporal(TemporalType.TIMESTAMP)
-    var changed: Timestamp? = null
+    private var changed: Timestamp? = null
 
     @OneToMany(mappedBy = "userId", fetch = FetchType.EAGER)
-    var links: MutableSet<Link> = mutableSetOf()
+    private var links: MutableSet<Link> = mutableSetOf()
+
+    fun getId(): Long? = id
+
+    fun getUsername(): String? = username
+
+    fun getDescription(): String? = description
+
+    fun getCreated(): Timestamp? = created
+
+    fun getChanged(): Timestamp? = changed
+
+    fun getLinks(): MutableSet<Link> = links
+
+    fun setUsername(newUsername: String?) {
+        this.username = newUsername
+    }
+
+    fun setDescription(newDescription: String?) {
+        this.description = newDescription
+    }
+
+    fun setCreated(newCreated: Timestamp?) {
+        this.created = newCreated
+    }
+
+    fun setChanged(newChanged: Timestamp?) {
+        this.changed = newChanged
+    }
+
+    override fun toString(): String {
+        return "User(id=$id, username=$username, description=$description, created=$created, changed=$changed, links=$links)"
+    }
 }
